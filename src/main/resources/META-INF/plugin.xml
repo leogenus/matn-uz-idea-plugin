@@ -1,0 +1,33 @@
+<idea-plugin>
+<id>org.example.MyFirstPlugin</id>
+<name>Plugin display name here</name>
+<vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+
+<description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+<!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+     on how to target different products -->
+<depends>com.intellij.modules.platform</depends>
+
+<extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+</extensions>
+
+<actions>
+    <group id="outer" text="Matn.Uz1" description="Transliterate matn.uz">
+        <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        <group id="inner" text="matn.uz Actions" description="Transliterate matn.uz" popup="true">
+            <action class="org.example.action.CyrilToLatinAction" id="cyrilToLatin" text="Cyril to Latin">
+                <keyboard-shortcut keymap="$default" first-keystroke="alt COMMA"/>
+            </action>
+            <action class="org.example.action.LatinToCyrilAction" id="latinToCyril" text="Latin to Cyril">
+                <keyboard-shortcut keymap="$default" first-keystroke="alt PERIOD"/>
+            </action>
+        </group>
+    </group>
+</actions>
+</idea-plugin>
+

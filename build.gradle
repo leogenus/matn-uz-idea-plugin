@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.21'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation('com.konghq:unirest-java:3.7.04')
+}
+
+jar {
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+intellij {
+    version 'IC-193.6494.35'
+    pluginName 'Dictionary'
+    type 'IC'
+    downloadSources true
+}
+
+patchPluginXml {
+    sinceBuild intellij.version
+    untilBuild null
+    version project.version
+    pluginDescription """
+Plugin for having a shared dictionary for all members of your project. <br>
+<br>
+It will automatically find any <code>project.dic</code> files and add them
+to the list of dictionaries. <br>
+<br>
+It will also search packages for dictionary files and add them to our list of dictionaries.
+    """
+    changeNotes """
+<p>0.2</p>
+<ul>
+    <li>Added support for listening for when a <code>project.dic</code> file is added, moved, deleted, copied.</li>
+</ul>
+<p>0.1</p>
+<ul>
+    <li>First edition of the plugin.</li>
+</ul>
+    """
+}
+
+/*publishPlugin {
+    token intellijPublishToken
+}*/
