@@ -47,7 +47,8 @@ public class LatinToCyrilAction extends AnAction {
     }
 
     private void replaceMassage(AnActionEvent event, Editor editor, String changeText) {
-        final Project project = CommonDataKeys.PROJECT.getData(event.getDataContext());
+        Project project = event.getData(CommonDataKeys.PROJECT);
+        if(Objects.isNull(project))return;
         CommandProcessor.getInstance().executeCommand(project, () -> {
             CaretModel caretModel = editor.getCaretModel();
             caretModel.moveToOffset(editor.getSelectionModel().getLeadSelectionOffset());
